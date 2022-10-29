@@ -16,6 +16,8 @@ class WebController extends Controller
         // $rootMenu = treeEntry::tree();
         // return view('index', compact('rootMenu'));
         
-       
+        return view('index',[
+            'menus' =>   treeEntry::tree()
+        ]);
     }
 }
