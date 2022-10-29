@@ -26,9 +26,39 @@
 
     <div class="side-bar">
         <div class="menu">
-        
-        <x-menus :menus="$menus" />
-        
+            @foreach($menus as $menu)
+            <div class="item">
+            
+                <a class="sub-btn" href="#">
+                    {{ $menu->name }} <i class="fas fa-angle-right dropdown"></i>
+                </a>
+                <div class="sub-menu">
+                @foreach($menu->children as $child)
+                
+                    <a href="#" class="sub-item sub-btn">{{ $child->name }} @if($child->isChild() !== 0)<i class="fas fa-angle-right dropdown"></i>@endif
+                    </a>
+                    <div class="sub-menu">
+                        @foreach($child->children as $child2)
+                            
+                                <a href="#" class="sub-item sub-btn">{{ $child2->name }} @if($child2->isChild() !== 0)<i class="fas fa-angle-right dropdown"></i>@endif</a>
+                                <div class="sub-menu">
+                                    @foreach($child2->children as $child3)
+
+                                            <a href="#" class="sub-item">{{ $child3->name }}</a>
+
+                                    @endforeach
+                                    </div>
+                                
+                            
+                        @endforeach
+                        </div>
+                    
+                    @endforeach
+                </div>
+                
+            </div>
+            
+            @endforeach
 
         </div>
     </div>

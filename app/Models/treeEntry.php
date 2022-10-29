@@ -16,7 +16,7 @@ class treeEntry extends Model
     public static function tree(){
         // $allMenu = treeEntry::get();
         $allMenu = treeEntry::join('tree_entry_lang','tree_entry_lang.entry_id','=','tree_entry.entry_id')->get();
-        $rootMenu = $allMenu->where('parent_entry_id',0);
+        $rootMenu = $allMenu->where('parent_entry_id',null);
         self::formatTree($rootMenu,$allMenu);
         return $rootMenu;
     }
@@ -30,7 +30,7 @@ class treeEntry extends Model
         }
     }
 
-    public function isChild()
+    public function isChild(): bool
     {
         return $this->parent_entry_id !== 0;
     }
